@@ -29,7 +29,8 @@ export default function Login() {
       const params = new URLSearchParams({ email, password });
       
       // Requisição POST com os campos passados como query parameters na URL
-      const response = await fetch(`http://localhost:5000/login?${params.toString()}`, {
+      const response = await fetch(`/api/items'?${params.toString()}`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json"
