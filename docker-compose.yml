@@ -1,5 +1,8 @@
 version: '3.8'
 
+networks:
+  app-network:  # Criamos uma rede Docker para comunicação interna
+
 services:
   backend:
     build: ./backend
@@ -13,6 +16,8 @@ services:
       - MYSQL_DB=mydatabase
     depends_on:
       - db
+    networks:
+      - app-network  # Adicionamos o backend à rede
 
   frontend:
     build: ./frontend
@@ -20,6 +25,8 @@ services:
       - "3000:80"
     depends_on:
       - backend
+    networks:
+      - app-network  # Adicionamos o frontend à rede
 
   db:
     image: mysql:8.0
@@ -35,6 +42,9 @@ services:
       interval: 5s
       timeout: 10s
       retries: 5
+    networks:
+      - app-network  # Adicionamos o banco de dados à rede
 
 volumes:
   mysql-data:
+
